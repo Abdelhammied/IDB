@@ -12,4 +12,5 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require("./pages/login/login-form")
+require("./pages/login/login-form");
+require('./components/sign-out');

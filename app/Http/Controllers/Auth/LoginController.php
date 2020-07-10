@@ -19,11 +19,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function showLoginForm()
-    {
-        return view('dashboard.auth.login');
-    }
-
     protected function validateLogin(Request $request)
     {
         $request->validate([
@@ -45,5 +40,22 @@ class LoginController extends Controller
         return $request->wantsJson()
             ? response()->json(['route' => route('dashboard.index')], 200)
             : redirect()->intended($this->redirectPath());
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? response()->json(['route' => route('dashboard.login')], 200)
+            : redirect('/');
     }
 }

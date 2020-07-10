@@ -5,4 +5,6 @@
 <script src="/js/icheck.min.js"></script>
 <script src="/js/adminlte.min.js"></script>
 
+<div id="signout-modal"></div>
+
 @stack('scripts')
